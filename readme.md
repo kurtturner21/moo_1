@@ -8,4 +8,5 @@ This is my attept to automate Masters of Orion.  It is not complete.
 - https://realpython.com/setting-up-a-simple-ocr-server/
 - https://pillow.readthedocs.io/en/stable/reference/Image.html
 - https://readthedocs.org/projects/pyautogui/downloads/pdf/latest/
-
+- https://pypi.org/project/ImageHash/
+- https://www.codementor.io/@isaib.cicourel/image-manipulation-in-python-du1089j1u

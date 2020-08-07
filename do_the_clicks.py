@@ -20,13 +20,11 @@ Goals:
 
 def app_config(): 
     parser = argparse.ArgumentParser(description='MOO button clicker.')
-    parser.add_argument(
-        '--momoney',
+    parser.add_argument('-mm', '--mo_money',
         action='store_true', 
         default=False,
         help='Run the mo money cheet.')
-    parser.add_argument(
-        '--sgalax',
+    parser.add_argument('-sg', '--show_galaxy',
         action='store_true', 
         default=False,
         help='Run the galaxy map cheet.')
@@ -44,7 +42,6 @@ def run_game():
             print(f'{loop_count} clicking n', ms_pos)
             sleep(1)
             ma.kill_popups()
-            break
     except KeyboardInterrupt:
         print('\nDone.')
 
@@ -53,11 +50,11 @@ def main():
     global app_vars
     app_vars = app_config()
     ma.look_for_dos_box()
-    print(f"Moo Money Cheet?   {app_vars.momoney}")
-    if app_vars.momoney:
+    print(f"Moo Money Cheet?   {app_vars.mo_money}")
+    if app_vars.mo_money:
         ma.mo_money(hunreds=21)
-    print(f"Galaxy cheet?   {app_vars.sgalax}")
-    if app_vars.sgalax:
+    print(f"Galaxy cheet?   {app_vars.show_galaxy}")
+    if app_vars.show_galaxy:
         ma.show_map_all()
     run_game()
 

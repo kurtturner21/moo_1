@@ -494,7 +494,7 @@ def run_game():
             ms_pos = pyautogui.position()
             map_current_view()
             # print(view_map_data)
-            ## moola cheet every 10 rounds
+            ## moola cheat every 10 rounds
             # if loop_count % moola_count_inter == 0:
             #     mo_money(hunreds=20)
             ### check all planet settings

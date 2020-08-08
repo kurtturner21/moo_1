@@ -23,25 +23,35 @@ def app_config():
     parser.add_argument('-mm', '--mo_money',
         action='store_true', 
         default=False,
-        help='Run the mo money cheet.')
+        help='Run the mo money cheat.')
     parser.add_argument('-sg', '--show_galaxy',
         action='store_true', 
         default=False,
-        help='Run the galaxy map cheet.')
+        help='Run the galaxy map cheat.')
+    parser.add_argument('-qe', '--quick_exit',
+        action='store_true', 
+        default=False,
+        help='Run some feachers and exit.')
+    parser.add_argument('-n', '--new_game',
+        action='store_true', 
+        default=False,
+        help='Run a new game (random).')
     args = parser.parse_args()
     return args
 
 
 def run_game():
     global app_vars
-    loop_count = 0
     try:
         while True:
-            loop_count += 1
-            ms_pos = pyautogui.position()
-            print(f'{loop_count} clicking n', ms_pos)
-            sleep(1)
+            # ms_pos = pyautogui.position()
+            # rel_x = ms_pos.x - ma.GS.x
+            # rel_y = ms_pos.y - ma.GS.y
+            # print(f'{loop_count} clicking n', (rel_x, rel_y))
+            sleep(.5)
             ma.kill_popups()
+            if app_vars.quick_exit:
+                break
     except KeyboardInterrupt:
         print('\nDone.')
 
@@ -50,10 +60,14 @@ def main():
     global app_vars
     app_vars = app_config()
     ma.look_for_dos_box()
-    print(f"Moo Money Cheet?   {app_vars.mo_money}")
+    print(f"Galaxy cheat?   {app_vars.new_game}")
+    if app_vars.new_game:
+        ma.start_new_game()
+        ma.clear_fleet()
+    print(f"Moo Money Cheat?   {app_vars.mo_money}")
     if app_vars.mo_money:
         ma.mo_money(hunreds=21)
-    print(f"Galaxy cheet?   {app_vars.show_galaxy}")
+    print(f"Galaxy Cheat?   {app_vars.show_galaxy}")
     if app_vars.show_galaxy:
         ma.show_map_all()
     run_game()

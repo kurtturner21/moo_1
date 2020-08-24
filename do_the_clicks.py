@@ -25,7 +25,7 @@ def main():
         ma.GS.new_col = True
         while True:
             loop_count += 1
-            ms_pos = ma.pyautogui.position()
+            # ms_pos = ma.pyautogui.position()
             # rel_x = ms_pos.x - ma.GS.x
             # rel_y = ms_pos.y - ma.GS.y
             # if ma.GS.args.debugging:

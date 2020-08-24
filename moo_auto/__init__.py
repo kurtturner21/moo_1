@@ -91,6 +91,15 @@ screen_cords = [
         "mv_to_click": [920, 460]
     },
     {
+        "cords_dict": {"x": 680, "y": 180, "w": 600, "h": 300},
+        "hashes": ['840040400080ffff'],
+        "msg": "Reduce Usage - YES.",
+        "text_color": [],
+        "search_text": [],
+        "keys_press": [],
+        "mv_to_click": [1140, 466]
+    },
+    {
         "cords_dict": {"x": 1250, "y": 250, "w": 150, "h": 200},
         "hashes": ["090d0d0d091df9f1"],
         "msg": "Inital tEcH.",
@@ -159,7 +168,6 @@ screen_cords = [
         "keys_press": ["esc"],
         "mv_to_click": []
     },
-
 ]
 
 

@@ -1,4 +1,5 @@
 
+### external
 import argparse
 import os
 import sys
@@ -10,232 +11,28 @@ from time import sleep
 from time import time
 import random
 
+### internal
+import moo_auto.popupdata
+
+
 class GS:
     x = 0
     y = 0
     w = 1440
     h = 930
-    race_screen = False
-    pop_up_sleep_time = 0 #.3
-    debugging = False
-    args = None
-    systems = set()
-    new_col = False
-    click_bases = [1155, 460]
-    time_stale_game = 0
-    time_last_popup = 0
-    time_last_stat = 0
-    time_last_base = 0
-    time_start = 0
+    debugging = False           # bool from cli
+    args = None                 # args from cli app execution
+    systems = set()             # set of system hashes from base review
+    click_bases = [1155, 460]   # happy spot for base investment
+    time_stale_game = 0         # epoch from last stale game detected 
+    time_last_popup = 0         # epoch from last pop killed
+    time_last_base = 0          # epoch from last base review
+    time_start = 0              # epoch from the start of the game
     popup_msgs = {}
-    im_app = None               # standard app windows image
-
-pyautogui.FAILSAFE = True
-screen_cords = [
-    { 
-        "cords_dict": {"x": 270, "y": 240, "w": 500, "h": 50},
-        "hashes": ["0000507e7e7e7e00"],
-        "msg": "Fleet Production",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    { 
-        "cords_dict": {"x": 220, "y": 270, "w": 600, "h": 350},
-        "hashes": [],
-        "msg": "Planetary Shield",
-        "text_color": [(195,195,195)],
-        "search_text": ["lanetary Shield"],
-        "keys_press": [],
-        "mv_to_click": GS.click_bases,
-        "mv_to_click_after_press": ["esc"],
-        "sleap_after": .5
-    },
-    {
-        "cords_dict": {"x": 850, "y": 400, "w": 300, "h": 100},
-        "hashes": ["ffff77ee88ee0000"],
-        "msg": "Select Ratio",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": [],
-        "mv_to_click": [920, 460],
-        "mv_to_click_after_press": [],
-        "sleap_after": .4
-    },
-    { 
-        "cords_dict": {"x": 1020, "y": 300, "w": 380, "h": 400},
-        "hashes": ["00503e7e7e7e0000"],
-        "msg": "Space Combat",
-        "text_color": [(239,239,239)],
-        "search_text": ["Space Combat"],
-        "keys_press": ["c"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    { 
-        "cords_dict": {"x": 220, "y": 270, "w": 600, "h": 350},
-        "hashes": [],
-        "msg": "Middle notice",
-        "text_color": [(195,195,195)],
-        "search_text": [
-            "be chonged at this time.",
-            "transports attempting To land on ",
-            "Your transports attemptina to land on",
-            "transports attempting to land on"
-            ],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    { 
-        "cords_dict": {"x": 155, "y": 640, "w": 1100, "h": 270},
-        "hashes": [],
-        "msg": "Deplimate Talks",
-        "text_color": [(0,0,0), (132,12,0)],
-        "search_text": [
-            "bring you an offer of peace",
-            "Both our races have suffered greatly",
-            "We can mo longer sustain this horrible war"
-            ],
-        "keys_press": ["up","return"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    { 
-        "cords_dict": {"x": 155, "y": 640, "w": 1100, "h": 270},
-        "hashes": [],
-        "msg": "Deplimate Talks - two",
-        "text_color": [(0,0,0), (132,12,0)],
-        "search_text": [
-            "Your attacks against the insidious",
-            "We shall make an example",
-            "bears greetings from the most",
-            "bear greetings from the most wise",
-            "It would seem that our empires",
-            "Hail glorious Emperor",
-            "Greetings from",
-            "Our patience is exhausted. Continue to expand and it will be war.",
-            "You have spread like a plague throughout the galaxy. Cease your reckless expansion or we will be forced to eliminate your threat once and for all.",
-            "star system an unprovoked act of war.",
-            "Let us work for a mutually beneficial relationship.",
-            "empire is tired of playing diplomatic games.",
-            "We have known all along that the",
-            "empire wishes mo contact with the filthy",
-            "and hopes that you will prosper under our rule"
-            ],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    {
-        "cords_dict": {"x": 850, "y": 400, "w": 300, "h": 100},
-        "hashes": ["ffff77ee88ee0000"],
-        "msg": "Select Ratio",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": [],
-        "mv_to_click": [920, 460],
-        "mv_to_click_after_press": [],
-        "sleap_after": .4
-    },
-    {
-        "cords_dict": {"x": 680, "y": 180, "w": 600, "h": 300},
-        "hashes": ['840040400080ffff'],
-        "msg": "Reduce Usage - YES.",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": [],
-        "mv_to_click": [1140, 466],
-        "mv_to_click_after_press": [],
-        "sleap_after": .4
-    },
-    {
-        "cords_dict": {"x": 1250, "y": 250, "w": 150, "h": 200},
-        "hashes": ["090d0d0d091df9f1","0101010d0d0d8dd9"],
-        "msg": "Inital tEcH.",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .4
-    },
-    {
-        "cords_dict": {"x": 700, "y": 180, "w": 700, "h": 60},
-        "hashes": [],
-        "msg": "Select next tech.",
-        "text_color": [(65,183,33)],
-        "search_text": ["Technology"],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .4
-    },
-    {
-        "cords_dict": {"x": 1030, "y": 280, "w": 360, "h": 100},
-        "hashes": [],
-        "msg": "Orbital Bombardment",
-        "text_color": [(192,151,112), (239,239,239)],
-        "search_text": ["Bombardment"],
-        "keys_press": ["c"],
-        "mv_to_click": [],
-        "sleap_after": .1
-    },
-    {
-        "cords_dict": {"x": 250, "y": 600, "w": 500, "h": 50},
-        "hashes": ["fff8f0080809099e"],
-        "msg": "News",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    {
-        "cords_dict": {"x": 100, "y": 250, "w": 700, "h": 50},
-        "hashes": ["41c3c3c0c3c3c3c3"],
-        "msg": "Voting - esc",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    {
-        "cords_dict": {"x": 1040, "y": 290, "w": 320, "h": 90},
-        "hashes": ['060f2feffc103030','203c3c2009ff7e02','a03c3c0049ff7e02',
-            'a03c3c240fdf7e00','203c3c2009fffe02','f8fc3c01dfff1a00','203c3c0009df7e02',
-            '283c3c2009ff7e02', '203c3c3019ff7e02','203c3c3001ff7e12','283c3c2009df7e02',
-            '203c3c2009df7e02', '203c3c3009ff7e02'],
-        "msg": "Start a new colony?",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["Y", "", "", "esc", "esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-    { 
-        "cords_dict": {"x": 650, "y": 100, "w": 150, "h": 150},
-        "hashes": ["ffcf0120ff8080ff"],
-        "msg": "Name that SHIP?",
-        "text_color": [],
-        "search_text": [],
-        "keys_press": ["esc"],
-        "mv_to_click": [],
-        "mv_to_click_after_press": [],
-        "sleap_after": .1
-    },
-]
+    im_app = None               # current app window image
+    mouse_pos = None            # current app mouse location
+    stale_next_secs = 10         # after bening stale click next
+    dos_box_in_game = True     # do we do the click when search for the dos box?
 
 
 #####
@@ -259,12 +56,21 @@ def app_config():
         action='store_true', 
         default=False,
         help='Run a new game (random).')
+    parser.add_argument('-cs', '--check_systems',
+        action='store_true', 
+        default=False,
+        help='Run a new game (random).')
+    parser.add_argument('-dn', '--do_not_click',
+        action='store_false', 
+        default=True,
+        help='When looking for dos box, do we click in the game?')
     parser.add_argument('-d', '--debugging',
         action='store_true', 
         default=False,
         help='Show more output.')
     GS.args = parser.parse_args()
     GS.debugging = GS.args.debugging
+    GS.dos_box_in_game = GS.args.do_not_click
 
 
 #####
@@ -325,7 +131,7 @@ def get_image_text(img, text_color):
     return ocr_text, img_for_text
 
 
-def look_for_dos_box(do_click=True):
+def look_for_dos_box():
     """
     Look for the doxbox logo at the top left of the running application.
     """
@@ -334,8 +140,10 @@ def look_for_dos_box(do_click=True):
         dos_box_pos = pyautogui.locateOnScreen(fn_p)
         if dos_box_pos:
             print('found dos box')
-            if do_click:
+            if GS.dos_box_in_game:
                 pyautogui.click(dos_box_pos.left+10, dos_box_pos.top+30,clicks=1, button='left',interval=1)
+            else:
+                pyautogui.click(dos_box_pos.left+30, dos_box_pos.top+10,clicks=1, button='left',interval=1)
             GS.x = dos_box_pos.left
             GS.y = dos_box_pos.top
             break
@@ -344,21 +152,28 @@ def look_for_dos_box(do_click=True):
 #####
 # Kill the popups
 #####
+def move_pointer_to_home():
+    sleep(.1)
+    pyautogui.moveTo(GS.x + 50, GS.y + 50, duration=.1)
+    sleep(.1)
+
+
 def kill_popups():
     """
     Kill popups after each turn.
     """
+
     while True:
         found_ct = kill_popups_two()
         if not found_ct:
             break
         else:
             GS.time_last_popup = time()
-    sleep(1)
 
 
 def kill_popups_two():
     GS.im_app = get_screen_shot() # get screan shot of app
+    screen_cords = popupdata.screen_cords(GS.click_bases)
     def do_action(so):
         """If the condiciton is med below, then do one of the following."""
         da_msg = s_cord['msg']
@@ -375,9 +190,11 @@ def kill_popups_two():
             if so['mv_to_click_after_press']:
                 sleep(so['sleap_after'])
                 pyautogui.press(so['mv_to_click_after_press'], interval=0)
+            move_pointer_to_home()
             sleep(so['sleap_after'])
         else:
             pyautogui.press(so['keys_press'], interval=0)
+            move_pointer_to_home()
             sleep(so['sleap_after'])
     for s_cord in screen_cords:
         ### process cropped image
@@ -415,21 +232,31 @@ def gen_popup_report():
         print(f'{m:<20} {GS.popup_msgs[m]}')
 
 
-def is_game_visible():
+def get_idle_game_string():
     """
-    This will tell you if the game bar is visible. 
+    Return a string of the game bar img hash and the mouse pointer.
     """
-    game_bar_hash = 'd487abe8bb04a42f'
-    game_bar_cords = (50,830,1400,910)
+    GS.mouse_pos = str(pyautogui.position())
+    GS.im_app = get_screen_shot()
+    game_bar_hash = 'c88cafe3b7008a3f'
+    game_bar_cords = (50,830,1100,910)
     game_bar_img = GS.im_app.crop((game_bar_cords))
-    game_area_current_hash = str(imagehash.phash(game_bar_img))
-    if game_area_current_hash == game_bar_hash:
-        return True
+    game_bar_current_hash = str(imagehash.phash(game_bar_img))
+    if game_bar_current_hash != game_bar_hash:
+        return '---'
     else:
-        return False
+        return game_bar_current_hash + '-' + GS.mouse_pos
 
 
 def review_systems():
+    def return_base_count():
+        base_ct_cords=(1340,290,1420,340)
+        base_ct_colors=[(255,218,76)]
+        GS.im_app = get_screen_shot()
+        base_im = GS.im_app.crop((base_ct_cords))
+        im_text, im_t_img = get_image_text(base_im, base_ct_colors)
+        # im_t_img.show()
+        return im_text
     def review_ship_builders():
         """If any amount of ship building, then push all RD to ships."""
         is_ship_building_hash='9887e638c1e4c6ee'
@@ -466,7 +293,7 @@ def review_systems():
         pyautogui.moveTo(GS.x + x, GS.y + y, duration=.1)
         pyautogui.click(GS.x + x, GS.y + y, clicks=1, button='left',interval=.1)
         sleep(.1)
-    first_hash = None
+    this_run_systems = set()  ### preventing endless runs.
     sys_name_cords=(1050,60,1400,120)
     sys_name_colors=[(232,205,135),(227,183,81),(215,162,31),(244,229,194)]
     sys_ct = 0
@@ -478,12 +305,11 @@ def review_systems():
         im_n = GS.im_app.crop((sys_name_cords))
         im_n_hash = imagehash.phash(im_n)
         im_text = get_image_text(im_n, sys_name_colors)[0]
-        if not first_hash:
-            first_hash = im_n_hash
-        elif im_n_hash == first_hash:
+        if im_n_hash in this_run_systems:
             break
-        if im_n_hash not in GS.systems:
+        elif im_n_hash not in GS.systems:
             GS.systems.add(im_n_hash)
+            this_run_systems.add(im_n_hash)
             is_new = True
         else:
             is_new = False
@@ -492,8 +318,11 @@ def review_systems():
         set_base_investment()
         get_clean_baby()
         a_builder = review_ship_builders()
-        # print(f'{sys_ct:<4} {is_new} P:{im_n_hash}  N:{im_text:<15} B:{a_builder}')
-        print(f'{sys_ct:<4} {is_new} N:{im_text:<10} B:{a_builder}')
+        base_ct = return_base_count()
+        # print(f'{sys_ct:<4} {is_new} P:{im_n_hash}  N:{im_text:<15} B:{a_builder} B:{base_ct}')
+        print(f'{sys_ct:<4} {is_new} N:{im_text:<10} B:{a_builder} B:{base_ct}')
+    move_pointer_to_home()
+    sleep(.2)
     print(f'we have {len(GS.systems)} systems.')
 
 
@@ -568,7 +397,6 @@ def clear_fleet():
         else:
             break
     pyautogui.press(['esc','esc'])
-
 
 
 ##############

@@ -1,0 +1,177 @@
+{
+    "8000000000000000": {
+        "base_ct": 4,
+        "is_building_shild": 2,
+        "is_lost": 1,
+        "is_population_diff": false,
+        "name": ""
+    },
+    "af93d06cd8e492c3": {
+        "base_ct": 21,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Tau Cygni"
+    },
+    "b08ccb67c7986699": {
+        "base_ct": 19,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Sssla"
+    },
+    "b098cb66e3c79899": {
+        "base_ct": 27,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Phyco"
+    },
+    "b099c96667c3c699": {
+        "base_ct": 3,
+        "is_building_shild": 2,
+        "is_lost": 1,
+        "is_population_diff": true,
+        "name": "Trax"
+    },
+    "b099cb66c7893399": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Altair"
+    },
+    "b099cf66c7892699": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Rana"
+    },
+    "b09bcf66c78c2398": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Galos"
+    },
+    "b0c8cd66c799c699": {
+        "base_ct": 16,
+        "is_building_shild": 2,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Dolz"
+    },
+    "b0ccc932c739ce99": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Lyae"
+    },
+    "b199cd66c68cc699": {
+        "base_ct": 18,
+        "is_building_shild": 2,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Gion"
+    },
+    "b398cc66c666cc99": {
+        "base_ct": 15,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Tyr"
+    },
+    "b89acb65c7986398": {
+        "base_ct": 0,
+        "is_building_shild": 2,
+        "is_lost": 1,
+        "is_population_diff": true,
+        "name": "Mobas"
+    },
+    "bc8cc361e3c2339e": {
+        "base_ct": 15,
+        "is_building_shild": 1,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Volantis"
+    },
+    "bc8ec361e1c9c69a": {
+        "base_ct": 0,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": true,
+        "name": "Mentar"
+    },
+    "bc96c361c19e649e": {
+        "base_ct": 21,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Hholdan"
+    },
+    "bc99cb66e7049398": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Nitzer"
+    },
+    "bc9acb656319c29a": {
+        "base_ct": 31,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Kronos"
+    },
+    "bc9acb6565c62299": {
+        "base_ct": 17,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Vulcan"
+    },
+    "bc9cc361c3c3319e": {
+        "base_ct": 17,
+        "is_building_shild": 2,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Paladia"
+    },
+    "bc9ec361e192e09e": {
+        "base_ct": 18,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "f#hardan"
+    },
+    "bcc6c331e199c69a": {
+        "base_ct": 14,
+        "is_building_shild": 1,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": ""
+    },
+    "bcc6c361e39ac398": {
+        "base_ct": 16,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Hyboria"
+    },
+    "bccbc364e092c799": {
+        "base_ct": 0,
+        "is_building_shild": 2,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Reticuli"
+    },
+    "bccec361e199c398": {
+        "base_ct": 9,
+        "is_building_shild": 0,
+        "is_lost": 0,
+        "is_population_diff": false,
+        "name": "Haydes"
+    }
+}

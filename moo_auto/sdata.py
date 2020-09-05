@@ -59,7 +59,9 @@ def system_data_count():
 def max_base_level_review():
     sys_count = len(ma.GS.system_data)
     if sys_count:
-        new_bases_level = int(system_data_count() * .8)
+        new_bases_level = int(system_data_count() * 1)
+        if new_bases_level < 2:
+            new_bases_level = 2
         ma.GS.max_bases_per_system = new_bases_level
 
 

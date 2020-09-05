@@ -93,15 +93,15 @@ def run():
                 """
                 idle_game_string_last = idle_game_string
                 GS.time_stale_game = time() 
-                GS.stale_next_secs = 5
+                GS.stale_next_secs = 3
                 continue
             # elif last_stale_game_secs < 2:
             #     continue
             print('finished clicking.')
             ### AUTO STUFF - don't want to do stuff while pops are still running.
             if (last_stale_game_secs <= GS.stale_next_secs 
-                    and last_system_mon_secs > (system_count * 3)
-                    or system_count == 0):
+                    and last_system_mon_secs > (system_count * 30)
+                    and last_system_mon_secs > 60):
                 play_time = int(datime - GS.time_start)
                 print(f'You have been planing for {play_time} seconds and system count is {system_count}.')
                 gen_popup_report()

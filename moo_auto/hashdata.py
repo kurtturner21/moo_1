@@ -5,6 +5,7 @@ system to know how many there are.
 
 def sysnames():
    return {
+      "bc8ed361e111cc9b": "Cryslon",
       "bcc6c361e39ac398": "Hyboria",
       "bcc6c331e199c69a": "Aquilae",
       "bc99cb66e7049398": "Nitzer",

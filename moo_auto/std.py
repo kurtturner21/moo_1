@@ -26,7 +26,7 @@ def app_config():
     parser.add_argument('-qe', '--quick_exit',
         action='store_true', 
         default=False,
-        help='Run some feachers and exit.')
+        help='Run some features and exit.')
     parser.add_argument('-n', '--new_game',
         action='store_true', 
         default=False,
@@ -53,17 +53,23 @@ def clear_fleet():
     Clear the board from the default unwanted ships.
     """
     def get_detail_fleet_view():
+        trys = 0
         while True:
+            sleep(.5)
             area_cords = (450, 50, 650, 100)
             im = ma.get_screen_shot()
             im_crop = im.crop(area_cords)
             im_crop_gy = ma.get_img_gray(im_crop)
             im_crop_hash = ma.get_image_hash(im_crop_gy)
-            if im_crop_hash not in ['7cfc80a4848cff00','6c9f848484dfffdc']:
+            if im_crop_hash not in ['7cfc80a4848cff00','6c9f848484dfffdc','7cfc80a48cccff00']:
                 pag.press(['esc','esc','f','v'])
+                trys += 1
                 sleep(1)
             else:
                 break
+            if trys > 10:
+                print('screen res might not be right.')
+                ma.sys.exit(20)
     unwanted_ships = {
         "0000fc78f87878f8": "SCOUT",
         "0000fe7efe7e7e7c": "FIGHTER",

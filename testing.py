@@ -7,7 +7,6 @@ Purpose: Show a part of screen shot for training.
 
 
 def main():
-    print('broke')
     ma.app_config()
     ma.look_for_dos_box()
     ma.system_data_read()
